@@ -1,1 +1,18 @@
 https://github.com/Shubli-rafat/udacity
+xoxb-4086969105191-4089691427943-11o2LzHZ7QJX17FXGTsuOIGj
+key-0a49603fb43ad6b1b
+
+postgres
+Arsh*1786
+
+udapeople-prod.c1v6vqtmiook.us-east-1.rds.amazonaws.com
+
+udapeople-kk1j287dhjppmz4371
+
+aws cloudformation deploy --template-file cloudfront.yml --stack-name InitialStack --parameter-overrides WorkflowID=udapeople-kk1j287dhjppmz4371
+
+
+aws cloudformation deploy --template-file .circleci/files/backend.yml --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  --tags project=udapeople
+
+
+82771790
