@@ -200,8 +200,7 @@ jobs:
           command: |
              cd .circleci/ansible
              ansible-playbook -i inventory.txt configure-server.yml
-      - destroy-environment:
-          workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}" 
+      
   run-migrations:
     docker:
       - image: circleci/node:13.8.0
@@ -210,9 +209,13 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - run:
+          name: Install dependencies
+          command: |
+            apk add --update tar gzip ansible nodejs npm curl && \
+            pip install awscli
+      - run:
           name: Run migrations
           command: |
-            set -e
             cd backend
             npm install
             npm run migrations > migrations_dump.txt

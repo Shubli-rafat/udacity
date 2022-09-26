@@ -9,12 +9,4 @@ udapeople-prod.c1v6vqtmiook.us-east-1.rds.amazonaws.com
 
 udapeople-kk1j287dhjppmz4371
 
-aws cloudformation deploy --template-file cloudfront.yml --stack-name InitialStack --parameter-overrides WorkflowID=udapeople-kk1j287dhjppmz4371
-
-
-aws cloudformation deploy --template-file .circleci/files/backend.yml --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  --tags project=udapeople
-
-
-82771790
-
-aws cloudformation deploy --template-file .circleci/files/frontend.yml --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  --tags project=udapeople
+CIRCLE_WORKFLOW_ID:0:7}"  --tags project=udapeople
