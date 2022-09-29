@@ -9,4 +9,6 @@ udapeople-prod.c1v6vqtmiook.us-east-1.rds.amazonaws.com
 
 udapeople-kk1j287dhjppmz4371
 
-CIRCLE_WORKFLOW_ID:0:7}"  --tags project=udapeople
+
+
+npm audit fix --force --audit-level=critical
