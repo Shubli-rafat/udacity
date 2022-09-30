@@ -354,7 +354,7 @@ cloudfront-update:
 
 cleanup:
     docker:
-      # Docker image here
+      # Docker image
     steps:
       # Checkout code from git
       - run:
