@@ -323,7 +323,7 @@ jobs:
       - run:
           name: Backend smoke test.
           command: |
-            echo "$(.circleci/ansible/back-ip.txt)""
+            echo "$(.circleci/ansible/back-ip.txt)"
             export BACKEND_IP=`cat .circleci/ansible/back-ip.txt`
             export API_URL="http://${BACKEND_IP}:3030"
             echo "${API_URL}"
