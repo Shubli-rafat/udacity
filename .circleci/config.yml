@@ -255,7 +255,11 @@ jobs:
             echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
             cat frontend/.env 
             echo "$BACKEND_IP" > .circleci/ansible/back-ip.txt  
-            cat .circleci/ansible/back-ip.txt                  
+            cat .circleci/ansible/back-ip.txt  
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/.circleci/ansible/back-ip.txt                
       - run:
           name: Deploy frontend objects
           command: |
@@ -319,6 +323,7 @@ jobs:
       - run:
           name: Backend smoke test.
           command: |
+            echo "$(.circleci/ansible/back-ip.txt)""
             export BACKEND_IP=`cat .circleci/ansible/back-ip.txt`
             export API_URL="http://${BACKEND_IP}:3030"
             echo "${API_URL}"
@@ -339,7 +344,11 @@ jobs:
             else
               return 1
             fi
-      # Here's where you will add some code to rollback on failure
+      - destroy-environment:
+          workflowid: ${CIRCLE_WORKFLOW_ID:0:7}
+      - revert-migrations:
+          workflowid: ${CIRCLE_WORKFLOW_ID:0:7}
+
 
 
 cloudfront-update:
