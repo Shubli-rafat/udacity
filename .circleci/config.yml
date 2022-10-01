@@ -247,10 +247,6 @@ jobs:
             echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
             cat frontend/.env 
       - run:
-          name: Install dependencies
-          command: |
-            pip install awscli
-      - run:
           name: Deploy frontend objects
           command: |
             #!/bin/bash -eo pipefail
