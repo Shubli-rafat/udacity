@@ -2,6 +2,7 @@ https://github.com/Shubli-rafat/udacity
 xoxb-4086969105191-4089691427943-11o2LzHZ7QJX17FXGTsuOIGj
 key-0a49603fb43ad6b1b
 
+udapeople-prod
 postgres
 Arsh*1786
 
@@ -10,5 +11,10 @@ udapeople-prod.c1v6vqtmiook.us-east-1.rds.amazonaws.com
 udapeople-kk1j287dhjppmz4371
 
 
+https://github.com/Shubhi87/MyProjectCICD/blob/master/.circleci/files/backend.yml
+https://github.com/KapilsRepo/Udacity-devops-udapeople/blob/main/.circleci/files/backend.yml
 
 npm audit fix --force --audit-level=critical
+
+
+ # $(aws ec2 describe-instances  --query 'Reservations[0].Instances[0].PublicIpAddress' --filters Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7} --output text)
