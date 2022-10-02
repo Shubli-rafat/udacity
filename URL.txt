@@ -16,5 +16,6 @@ https://github.com/KapilsRepo/Udacity-devops-udapeople/blob/main/.circleci/files
 
 npm audit fix --force --audit-level=critical
 
+      
 
- # $(aws ec2 describe-instances  --query 'Reservations[0].Instances[0].PublicIpAddress' --filters Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7} --output text)
+
