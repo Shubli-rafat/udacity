@@ -229,13 +229,13 @@ jobs:
   
   run-migrations:
     docker:
-      - image: circleci/node:13.8.0
+      - image: circleci/node:14.18.1
     steps:
       - checkout
       - attach_workspace:
           at: ~/
-      - restore_cache:
-          keys: [backend-build]
+      # - restore_cache:
+      #     keys: [backend-build]
       - run:
            name: Install dependencies
            command: |          
@@ -280,13 +280,7 @@ jobs:
             export API_URL="http://${BACKEND_IP}:3030"
             echo "API_URL = ${API_URL}"
             echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
-            cat frontend/.env 
-            echo "$BACKEND_IP" > .circleci/ansible/back-ip.txt  
-            cat .circleci/ansible/back-ip.txt  
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - project/.circleci/ansible/back-ip.txt                
+            cat frontend/.env                
       - run:
           name: Deploy frontend objects
           command: |
