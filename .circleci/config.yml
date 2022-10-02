@@ -234,23 +234,15 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/
-      - install_awscli
       - restore_cache:
           keys: [backend-build]
       - run:
           name: Run migrations
           command: |
             cd backend
-            # npm install   
-            # Run and save the migration output
-            # npm audit fix --audit-level=critical --force
-            # npm audit fix --force
-            # npm audit --audit-level=critical
-            # npm audit fix
             npm run migrations 
-            # npm run migrations > migrations_dump.txt
-            # cat migrations_dump.txt
-            # for commit only
+            npm run migrations > migrations_dump.txt
+
       - run:
           name: Send migration results to memstash
           command: |
