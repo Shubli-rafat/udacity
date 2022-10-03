@@ -289,7 +289,8 @@ jobs:
             echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> .env
             echo TYPEORM_MIGRATIONS=./src/migrations/*.ts >> .env
             echo TYPEORM_MIGRATIONS_DIR=$TYPEORM_MIGRATIONS_DIR >> .env
-            
+
+            cat .env
             npm i
             npm run build
             cd ..
