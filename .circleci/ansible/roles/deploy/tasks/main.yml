@@ -14,87 +14,27 @@
     global: yes
     production: yes
     state: present
-- name: "copy backend file"
-  become: true
-  copy:
-    src: /root/project/backend
-    dest: /root
-    force: no
-- name: "install npm packages"
-  become: true
-  command: npm install
-  args:
-    chdir: /root/backend
-- name: "compile npm packages"
-  become: true
-  command: npm run build
-  args:
-    chdir: /root/backend
-- name: "start server"
-  become: true
-  command: pm2 start npm -- run start
-  args:
-    chdir: /root/backend/dist
-# ---
-# - name: "create directory"
-#   file:
-#     path: /home/ubuntu/backend
-#     state: directory
-
-# - name: "upgrade packages."
+# - name: "copy backend file"
 #   become: true
-#   apt:
-#     upgrade: "yes"
-
-# - name: "install dependencies."
-#   become: true
-#   apt:
-#     name: ["nodejs", "npm"]
-#     update_cache: yes
-
-# - name: "install pm2"
-#   become: true
-#   npm:
-#     name: pm2
-#     global: yes
-#     production: yes
-#     state: present
-    
-# - name: "copy the code into ec2 instance"
-#   become: yes
-#   synchronize:
+#   copy:
 #     src: /root/project/backend
-#     dest: /home/ubuntu
-#     recursive: true
-
-# - name: "change ownership of node modules"
-#   become: yes
-#   shell: |
-#     sudo chown -R ubuntu: backend
-#     sudo chmod -R a+rwx backend
-#   args:
-#     chdir: /home/ubuntu
-
+#     dest: /root
+#     force: no
 # - name: "install npm packages"
 #   become: true
-#   shell: |
-#     npm install
-#     npm run build
+#   command: npm install
 #   args:
-#     chdir: /home/ubuntu/backend
-
+#     chdir: /root/backend
 # - name: "compile npm packages"
 #   become: true
 #   command: npm run build
 #   args:
-#     chdir: /home/ubuntu/backend
-
-# - name: "start the code"
+#     chdir: /root/backend
+# - name: "start server"
 #   become: true
-#   shell: |
-#     pm2 start -f ./main.js
+#   command: pm2 start npm -- run start
 #   args:
-#     chdir: /home/ubuntu/backend/dist
+#     chdir: /root/backend/dist
 
 #   environment:
 
