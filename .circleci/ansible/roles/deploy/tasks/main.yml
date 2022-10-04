@@ -1,38 +1,60 @@
-- name: 'Creates backend app directory'
-  file:
-    path: ~/backend-app
-    state: directory
+- name: "Copy the Compiled backend Files to EC2 instance"
+  copy:
+    src: /root/project/artifact.tar.gz
+    dest: /home/ubuntu
 
-- name: 'Unarchive backend files'
+- name: "unarchive the dist directory"
   unarchive:
-    src: /home/circleci/project/artifact.tar.gz 
-    dest: ~/backend-app
+    src: /home/ubuntu/artifact.tar.gz
+    dest: /home/ubuntu
+    copy: no
 
-- name: 'Installing Node Dependencies'
+- name: "Install Dependencies"
   shell: |
-    cd ~/backend-app
-    npm i
-- name: 'Executing Node app with PM2'
-  shell: |
-    cd ~/backend-app/dist
-    cd ../
-    npm install    
+    cd /home/ubuntu/backend
+    npm install
     npm run build
-    # sudo pm2 stop default
-    # sudo pm2 start npm -- start
-    # sudo pm2 start main.js    
-    sudo npm install forever -g
-    sudo npm install ts-node -g
-    forever start -c "ts-node -r tsconfig-paths/register -r dotenv/config src/main.ts" ./
-  register: execute_node
-
-- name: print message
-  debug:
-    msg: '{{ execute_node.stdout_lines }}'
-- name: 'Configure pm2 to start as service'
-  become: true
+- name: "Run the backend app"
   shell: |
-    env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
+    cd /home/ubuntu/backend
+    pm2 start npm --name backend -- start
+    pm2 ls
+    
+# - name: 'Creates backend app directory'
+#   file:
+#     path: ~/backend-app
+#     state: directory
+
+# - name: 'Unarchive backend files'
+#   unarchive:
+#     src: /root/project/artifact.tar.gz 
+#     dest: ~/backend-app
+
+# - name: 'Installing Node Dependencies'
+#   shell: |
+#     cd ~/backend-app
+#     npm i
+# - name: 'Executing Node app with PM2'
+#   shell: |
+#     cd ~/backend-app/dist
+#     cd ../
+#     npm install    
+#     npm run build
+#     # sudo pm2 stop default
+#     # sudo pm2 start npm -- start
+#     # sudo pm2 start main.js    
+#     sudo npm install forever -g
+#     sudo npm install ts-node -g
+#     forever start -c "ts-node -r tsconfig-paths/register -r dotenv/config src/main.ts" ./
+#   register: execute_node
+
+# - name: print message
+#   debug:
+#     msg: '{{ execute_node.stdout_lines }}'
+# - name: 'Configure pm2 to start as service'
+#   become: true
+#   shell: |
+#     env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
 
 #   environment:
 
