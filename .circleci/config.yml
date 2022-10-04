@@ -421,7 +421,7 @@ jobs:
           name: Remove old stacks and files
           command: |
             export OldWorkflowID=$(cat ~/project/OldWorkflowId.txt)
-            echo Old workflow id : "${OldWorkflowID}"
+            echo Old workflow id: "${OldWorkflowID}"
             echo Current workflow id: "${CIRCLE_WORKFLOW_ID:0:7}" 
 
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
