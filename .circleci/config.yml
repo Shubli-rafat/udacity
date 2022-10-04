@@ -297,7 +297,8 @@ jobs:
       - run:
           name: Deploy backend
           command: |
-            echo ENVIRONMENT=production > backend/.env
+            cd backend
+            echo ENVIRONMENT=production >> backend/.env
             echo TYPEORM_CONNECTION=postgres >> backend/.env
             echo TYPEORM_MIGRATIONS_DIR=./src/migrations >> backend/.env
             echo TYPEORM_ENTITIES=./src/modules/domain/**/*.entity.ts >> backend/.env
@@ -308,7 +309,7 @@ jobs:
             echo TYPEORM_PASSWORD=$TYPEORM_PASSWORD >> "backend/.env"
             echo TYPEORM_DATABASE=$TYPEORM_DATABASE >> "backend/.env"
             cat backend/.env
-            cd backend
+            
             npm i
             npm run build
             cd ..
@@ -316,7 +317,7 @@ jobs:
             tar -C backend -czvf artifact.tar.gz .
             pwd
             cd .circleci/ansible
-            echo "Contents  of the inventory.txt file is ---"
+            echo "Contents  of the inventory.txt file is --"
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
       - destroy-environment:
