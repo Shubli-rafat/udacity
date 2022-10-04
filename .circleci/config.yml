@@ -371,7 +371,7 @@ jobs:
       - revert-migrations:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}"
 
-cloudfront-update:
+  cloudfront-update:
     docker:
       amazon/aws-cli
     steps:
@@ -405,7 +405,7 @@ cloudfront-update:
       - revert-migrations:
           workflow_id: "${CIRCLE_WORKFLOW_ID:0:7}" 
 
-cleanup:
+  cleanup:
     docker:
       amazon/aws-cli
     steps:
